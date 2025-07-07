@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NuleX - Redirecionando...</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    animation: {
+                        'float': 'float 3s ease-in-out infinite',
+                        'glow': 'glow 2s ease-in-out infinite alternate',
+                        'pulse-slow': 'pulse 3s ease-in-out infinite',
+                        'progress': 'progress 3s ease-out forwards',
+                        'scanline': 'scanline 2s linear infinite',
+                        'fadeIn': 'fadeIn 0.5s ease-out',
+                        'slideUp': 'slideUp 0.6s ease-out',
+                        'typing': 'typing 2s steps(20) infinite'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            background: #000;
+            overflow: hidden;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes glow {
+            from { box-shadow: 0 0 20px rgba(34, 211, 238, 0.3); }
+            to { box-shadow: 0 0 40px rgba(34, 211, 238, 0.6); }
+        }
+
+        @keyframes progress {
+            0% { width: 0%; }
+            100% { width: 100%; }
+        }
+
+        @keyframes scanline {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px) scale(0.95); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        @keyframes typing {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+
+
+        .ghost-icon {
+    width: 40px;
+    height: 40px;
+    background-image: url('http://localhost:3000/logo.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: inline-block;
+    border-radius: 8px;
+}
+
+
+.ghost-icon-sm {
+    width: 20px;
+    height: 28px;
+}
+
+.ghost-icon-lg {
+    width: 80px;
+    height: 80px;
+}
+
+.ghost-icon-xl {
+    width: 120px;
+    height: 120px;
+}
+
+     
+        .redirect-container {
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+            border: 1px solid rgba(34, 211, 238, 0.2);
+            border-radius: 24px;
+            overflow: hidden;
+            position: relative;
+            backdrop-filter: blur(20px);
+            box-shadow: 
+                0 25px 50px rgba(0, 0, 0, 0.8),
+                0 0 0 1px rgba(34, 211, 238, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.05);
+            animation: slideUp 0.8s ease-out;
+        }
+
+        .redirect-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #22d3ee, transparent);
+            animation: scanline 3s linear infinite;
+            opacity: 0.8;
+        }
+
+    
+        .progress-track {
+            width: 100%;
+            height: 6px;
+            background: rgba(34, 211, 238, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+            border: 1px solid rgba(34, 211, 238, 0.2);
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #22d3ee, #3b82f6);
+            border-radius: 10px;
+            position: relative;
+            animation: progress 3s ease-out forwards;
+            box-shadow: 0 0 15px rgba(34, 211, 238, 0.5);
+        }
+
+        .progress-fill::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            border-radius: 10px;
+            animation: scanline 1.5s linear infinite;
+        }
+
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: #22d3ee;
+            border-radius: 50%;
+            animation: glow 2s ease-in-out infinite alternate;
+            box-shadow: 0 0 10px rgba(34, 211, 238, 0.5);
+        }
+
+
+        .typing-cursor {
+            animation: typing 1s infinite;
+            color: #22d3ee;
+        }
+
+
+        .animated-bg {
+            background: linear-gradient(-45deg, #000, #111, #000, #0a0a0a);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+        }
+
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+ 
+        .floating-element {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(34, 211, 238, 0.3);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .floating-element:nth-child(1) { top: 20%; left: 10%; animation-delay: 0s; }
+        .floating-element:nth-child(2) { top: 60%; left: 20%; animation-delay: 1s; }
+        .floating-element:nth-child(3) { top: 30%; right: 15%; animation-delay: 2s; }
+        .floating-element:nth-child(4) { bottom: 40%; right: 25%; animation-delay: 3s; }
+        .floating-element:nth-child(5) { bottom: 20%; left: 30%; animation-delay: 4s; }
+
+
+        .success-state {
+            opacity: 0;
+            transform: scale(0.8);
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .success-state.show {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+ 
+        .percentage-display {
+            font-family: 'Courier New', monospace;
+            font-weight: 700;
+            color: #22d3ee;
+            text-shadow: 0 0 10px rgba(34, 211, 238, 0.5);
+            font-size: 2rem;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+    </style>
+</head>
+<body class="animated-bg text-white min-h-screen flex items-center justify-center relative">
+    
+    <div class="fixed inset-0 pointer-events-none">
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+    </div>
+
+    
+    <div class="absolute inset-0 bg-gradient-to-br from-cyan-900/10 via-transparent to-blue-900/5"></div>
+    <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-cyan-500/5 rounded-full blur-3xl animate-float"></div>
+    <div class="absolute bottom-1/4 right-1/4 w-80 h-80 bg-blue-500/5 rounded-full blur-3xl animate-float" style="animation-delay: -2s;"></div>
+
+    
+    <div class="relative z-10 w-full max-w-lg mx-auto px-6">
+        <div class="redirect-container p-10">
+            
+            <div class="text-center mb-8">
+                
+                <div class="mb-6">
+                    <div class="ghost-icon ghost-icon-lg text-cyan-400 mx-auto animate-float"></div>
+                </div>
+
+                
+                <h1 class="text-3xl font-light text-white mb-2 tracking-wide">
+                    Nu<span class="text-cyan-400">leX</span>
+                </h1>
+                <p class="text-gray-400 text-sm">Loading...</p>
+            </div>
+
+            
+            <div class="mb-8">
+                <div class="flex items-center justify-center space-x-3 mb-4">
+                    <div class="status-dot"></div>
+                    <span id="statusText" class="text-gray-300 text-lg">Iniciando redirecionamento</span>
+                    <span class="typing-cursor">|</span>
+                </div>
+                
+                
+                <div class="progress-track mb-4">
+                    <div class="progress-fill" id="progressBar"></div>
+                </div>
+
+                
+                <div class="text-center">
+                    <span id="percentage" class="percentage-display">0%</span>
+                </div>
+            </div>
+
+            
+            <div class="space-y-3 mb-8">
+                <div id="step1" class="flex items-center space-x-3 text-sm text-gray-500 transition-all duration-300">
+                    <div class="w-2 h-2 rounded-full bg-gray-600"></div>
+                    <span>Verificando autenticação...</span>
+                </div>
+                <div id="step2" class="flex items-center space-x-3 text-sm text-gray-500 transition-all duration-300">
+                    <div class="w-2 h-2 rounded-full bg-gray-600"></div>
+                    <span>Carregando dashboard...</span>
+                </div>
+                <div id="step3" class="flex items-center space-x-3 text-sm text-gray-500 transition-all duration-300">
+                    <div class="w-2 h-2 rounded-full bg-gray-600"></div>
+                    <span>Preparando interface...</span>
+                </div>
+                <div id="step4" class="flex items-center space-x-3 text-sm text-gray-500 transition-all duration-300">
+                    <div class="w-2 h-2 rounded-full bg-gray-600"></div>
+                    <span>Finalizando...</span>
+                </div>
+            </div>
+
+            
+            <div id="successState" class="success-state text-center">
+                <div class="bg-green-500/10 border border-green-500/30 rounded-full p-4 inline-block mb-4">
+                    <svg class="w-8 h-8 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                </div>
+                <p class="text-green-400 font-medium">Redirecionamento concluído!</p>
+                <p class="text-gray-400 text-sm mt-2">Você será redirecionado em instantes...</p>
+            </div>
+
+        </div>
+
+        
+        <div class="text-center mt-6">
+            <p class="text-gray-600 text-xs">
+                Redirecionamento automático em andamento...
+            </p>
+        </div>
+    </div>
+
+    <script>
+
+        const REDIRECT_URL = 'https://nulex.cc';
+        const TOTAL_DURATION = 3000; 
+        const UPDATE_INTERVAL = 30; 
+        let currentProgress = 0;
+        let redirectCancelled = false;
+        let currentStepIndex = 0;
+        const statusMessages = [
+            "Iniciando redirecionamento",
+            "Conectando ao servidor",
+            "Verificando credenciais",
+            "Carregando dados",
+            "Preparando dashboard",
+            "Quase pronto",
+            "Redirecionando"
+        ];
+        const progressBar = document.getElementById('progressBar');
+        const percentage = document.getElementById('percentage');
+        const statusText = document.getElementById('statusText');
+        const successState = document.getElementById('successState');
+        function updateProgress() {
+            if (redirectCancelled) return;
+
+            currentProgress += (100 / (TOTAL_DURATION / UPDATE_INTERVAL));
+            
+            if (currentProgress > 100) {
+                currentProgress = 100;
+            }
+            percentage.textContent = Math.floor(currentProgress) + '%';
+            const messageIndex = Math.floor((currentProgress / 100) * (statusMessages.length - 1));
+            if (statusText.textContent !== statusMessages[messageIndex]) {
+                statusText.style.opacity = '0.5';
+                setTimeout(() => {
+                    statusText.textContent = statusMessages[messageIndex];
+                    statusText.style.opacity = '1';
+                }, 100);
+            }
+            updateSteps();
+            if (currentProgress >= 100) {
+                completeRedirect();
+                return;
+            }
+
+            setTimeout(updateProgress, UPDATE_INTERVAL);
+        }
+        function updateSteps() {
+            const steps = ['step1', 'step2', 'step3', 'step4'];
+            const newStepIndex = Math.floor((currentProgress / 100) * steps.length);
+
+            if (newStepIndex > currentStepIndex) {
+                for (let i = 0; i <= newStepIndex && i < steps.length; i++) {
+                    const step = document.getElementById(steps[i]);
+                    const dot = step.querySelector('.w-2');
+                    
+                    step.classList.remove('text-gray-500');
+                    step.classList.add('text-cyan-400');
+                    dot.classList.remove('bg-gray-600');
+                    dot.classList.add('bg-cyan-400');
+                }
+                currentStepIndex = newStepIndex;
+            }
+        }
+        function completeRedirect() {
+            if (redirectCancelled) return;
+            document.querySelector('.progress-track').style.opacity = '0';
+            percentage.style.opacity = '0';
+            statusText.style.opacity = '0';
+            document.querySelector('.typing-cursor').style.opacity = '0';
+            setTimeout(() => {
+                successState.classList.add('show');
+                setTimeout(() => {
+                    if (!redirectCancelled) {
+                        window.location.href = REDIRECT_URL;
+                    }
+                }, 1500);
+            }, 300);
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(() => {
+                updateProgress();
+            }, 800);
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    cancelRedirect();
+                }
+            });
+            window.addEventListener('beforeunload', function(e) {
+                if (!redirectCancelled && currentProgress < 100) {
+                    e.preventDefault();
+                    e.returnValue = 'Redirecionamento em andamento. Tem certeza que deseja sair?';
+                }
+            });
+        });
+        document.addEventListener('visibilitychange', function() {
+            if (document.hidden) {
+                console.log('hidden');
+            } else {
+                console.log('visivel');
+            }
+        });
+    </script>
+</body>
+</html>
